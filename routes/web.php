@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return view("index");
+});
+Route::get('/about', function () {
+    return view("about");
+});
+Route::get('/category', function () {
+    return view("category");
+});
+Route::get('/projects', function () {
+    return view("projects");
+});
+Route::get('/news', function () {
+    return view("news");
 });
