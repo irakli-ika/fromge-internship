@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Pages;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,19 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view("index");
-});
-Route::get('/about', function () {
-    return view("about");
-});
-Route::get('/category', function () {
-    return view("category");
-});
-Route::get('/projects', function () {
-    return view("projects");
-});
-Route::get('/news', function () {
-    return view("news");
+Route::controller(Pages::class)->group(function () {
+    Route::get('/', "index");
+    Route::get('/about', "about");
+    Route::get('/category', "category");
+    Route::get('/news', "news");
+    Route::get('/projects', "projects");
 });
