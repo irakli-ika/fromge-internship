@@ -17,17 +17,25 @@
         <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ $heade }}</h5>
         <p class="text-gray-700 text-base mb-4">{{ $body }}</p>
     </div>
-     {{-- footer bar --}}
-     <div class="flex justify-between items-center">
-        <div class="mt-2">
-            {{-- unlike --}}
-            <a href="" class="text-blue-500 hover:text-blue-700 text-xl">
-                <i class="fa-regular fa-thumbs-up"></i>
-            </a>
-            {{-- like --}}
-            <a href="" class="text-blue-500 hover:text-blue-700 text-xl">
-                <i class="fa-solid fa-thumbs-up"></i>
-            </a>
+    {{-- footer bar --}}
+    <div class="flex justify-between items-center">
+        <div class="mt-2 flex items-center gap-2">
+            <form action="{{ route('like') }}" method="post" class="like-form">
+                @csrf
+                {{-- hidden input --}}
+                <input type="hidden" name="post_id" value="{{ $id }}">
+                {{-- like --}}
+                <button type="submit" name="like" class="text-blue-500 hover:text-blue-700 text-xl">
+                    @if (Auth::user()->like()->where('post_id', $id)->first())
+                        <i class="fa-solid fa-thumbs-up pointer-events-none"></i>
+                    @else
+                        <i class="fa-regular fa-thumbs-up pointer-events-none"></i>
+                    @endif
+                </button>
+            </form>
+            <div class="text-sm">
+                <span class="like_qty_{{ $id }}">{{ $like->where('post_id', $id)->count() }}</span> like
+            </div>
         </div>
         <div>
             <a href="" class="text-blue-500 hover:text-blue-700">Comment</a>

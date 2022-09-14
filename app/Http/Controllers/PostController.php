@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -14,8 +16,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {  
         $posts = Post::All()->sortByDesc('updated_at');
+        
         return view('home', compact('posts'));
 
     }
@@ -113,18 +116,5 @@ class PostController extends Controller
         $post = Post::findOrFail($post->id);
         $post->delete();
         return redirect()->route('posts.index')->with('message', 'Post deleted successfully');
-    }
-
-    public function like(Request $request) {
-        $post_id = $request->post_id;
-
-        $like = DB::table('likes')->where('post_id', $post_id)
-        ->where('user_id', Auth::user->id)
-        ->first();
-
-        dd($like);
-
-        
-
     }
 }

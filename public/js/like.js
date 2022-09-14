@@ -1,64 +1,82 @@
-let postId;
+// const like_forms = document.querySelectorAll('.like-form');
 
-// const like = (btn) => {
-//     btn.preventDefault();
-    
-//     postId = btn.target.dataset['id'];
+// like_forms.forEach(form => {
+//     form.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         const post_id = form.post_id.value;
+//         const data = {
+//             user_id : user_id,
+//             post_id : post_id,
+//          };
 
-//     let data = {
-//         post_id: postId,
-//         _token: token
-//     }
-
-//     fetch(url, {
-//         Method: 'POST',
-//         Body: data,
-//         Headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json'
-//         }
-//     }).then((response) => {
-//         return response.json()
-//     }).then((res) => {
-//         if (res.status === 201) {
-//             console.log("Post successfully created!")
-//         }
-//     }).catch((error) => {
-//         console.log(error)
+//         fetch(url, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'X-CSRF-Token': form._token.value
+//         },
+//             body: JSON.stringify(data),
+//         })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             const like_btn = form.like;
+//             const dislike_btn = form.dislike;
+//             if (data.status === "like") {
+//                 dislike_btn.classList.add('hidden');
+//                 like_btn.classList.remove('hidden');
+//             } else {
+//                 dislike_btn.classList.remove('hidden');
+//                 like_btn.classList.add('hidden');
+//             }
+//             console.log(data);
+//         })
+//         .catch((error) => {
+//             console.error('Error:', error);
+//         });
+        
 //     })
-// }
+    
+// })
 
 
+const like_forms = document.querySelectorAll('.like-form');
 
+const likeQty = (id) => document.querySelector(`.like_qty_${ id }`);
 
-$('.like').on('click', function (btn) {
-    btn.preventDefault();
+like_forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const post_id = form.post_id.value;
+        const data = {
+            user_id : user_id,
+            post_id : post_id,
+         };
 
-    postId = btn.target.dataset['id'];
-
-    let data = {
-        post_id: +postId,
-        _token: token
-    }
-    // $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-    //     }
-    // });
-
-    $.ajax({
-        type: "POST",
-        url: "https://jsonplaceholder.typicode.com/posts",
-        data: data,
-        dataType: 'JSON',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': form._token.value
         },
-        success: function(data) {
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            const like_btn = form.like;
+
+            if (data.status === "like") {
+                like_btn.innerHTML = `<i class="fa-solid fa-thumbs-up pointer-events-none"></i>`
+                likeQty(post_id).innerHTML ++
+            } else {
+                like_btn.innerHTML = `<i class="fa-regular fa-thumbs-up pointer-events-none"></i>`
+                likeQty(post_id).innerHTML --
+            }
             console.log(data);
-        },
-        error:function(){ 
-            console.log(data);
-        }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        
     })
+    
 })

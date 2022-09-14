@@ -22,15 +22,23 @@
     </div>
     {{-- footer bar --}}
     <div class="flex justify-between items-center">
-        <div class="mt-2">
-            {{-- unlike --}}
-            <a href="" data-id="{{ $id }}" class="like text-blue-500 hover:text-blue-700 text-xl">
-                <i class="fa-regular fa-thumbs-up pointer-events-none"></i>
-            </a>
-            {{-- like --}}
-            <a href="" onclick="dislike(event)" data-id="{{ $id }}" class="text-blue-500 hover:text-blue-700 text-xl">
-                <i class="fa-solid fa-thumbs-up pointer-events-none"></i>
-            </a>
+        <div class="mt-2 flex items-center gap-2">
+            <form action="{{ route('like') }}" method="post" class="like-form">
+                @csrf
+                {{-- hidden input --}}
+                <input type="hidden" name="post_id" value="{{ $id }}">
+                {{-- like --}}
+                <button type="submit" name="like" class="text-blue-500 hover:text-blue-700 text-xl">
+                    @if (Auth::user()->like()->where('post_id', $id)->first())
+                        <i class="fa-solid fa-thumbs-up pointer-events-none"></i>
+                    @else
+                        <i class="fa-regular fa-thumbs-up pointer-events-none"></i>
+                    @endif
+                </button>
+            </form>
+            <div class="text-sm">
+                <span class="like_qty_{{ $id }}">{{ $like->where('post_id', $id)->count() }}</span> like
+            </div>
         </div>
         <div>
             <a href="" class="text-blue-500 hover:text-blue-700">Comment</a>

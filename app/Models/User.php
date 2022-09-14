@@ -11,6 +11,9 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Like;
+use App\Models\Post;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -59,10 +62,10 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function posts() {
-        return $this->hasMany(Post::class);
-    }
-    public function likes() {
+    public function like() {
         return $this->hasMany(Like::class);
     }
+    // public function post() {
+    //     return $this->hasMany(Post::class);
+    // }
 }

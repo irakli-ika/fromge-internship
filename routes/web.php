@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +27,5 @@ Route::middleware([
     //     return view('dashboard');
     // })->name('dashboard');
     Route::resource('posts', PostController::class);
-    Route::get('posts/like', [PostController::class, 'like']);
-    Route::post('posts/like', [PostController::class, 'like'])->name('like');
+    Route::post('posts/like', [LikeController::class, 'like'])->name('like');
 });
