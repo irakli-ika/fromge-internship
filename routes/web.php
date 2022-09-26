@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +24,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // })->name('dashboard');
     Route::resource('posts', PostController::class);
     Route::post('posts/like', [LikeController::class, 'like'])->name('like');
+    Route::post('posts/comment', [CommentController::class, 'comment'])->name('comment');
 });

@@ -15,8 +15,6 @@ class LikeController extends Controller
             ['user_id', Auth::user()->id]
         ])->get();
         
-        $like_qty = Like::Where('post_id', $post_id)->count();
-        
         if($is_like->isEmpty()) {
             $like = new Like();
             $like -> user_id = Auth::user()->id;

@@ -16,8 +16,9 @@
                     grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {{-- <p>{{ $like_qty }}</p> --}}
             @forelse ($posts as $post) 
-                <x-jet-post-card :id="$post->id" :heade="$post->heade"
-                                 :body="$post->body" :like="$post->like"/>  
+                <x-jet-post-card :postId="$post->id" :heade="$post->heade"
+                                 :body="$post->body" :like="$post->like"
+                                 :comments="$post->comments" :user="$post->user"/>
             @empty  
                 <h2>No post yet.</h2>
             @endforelse

@@ -7,10 +7,12 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- custom style -->
+        <link rel="stylesheet" href="{{ asset('styles/scrollbar.css') }}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         {{-- fontawesome cdn link --}}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         
@@ -45,9 +47,11 @@
         @livewireScripts
         <!-- Scripts -->
         <script src="{{ asset('js/like.js')}}"></script>
+        <script src="{{ asset('js/comment.js')}}"></script>
         <script type="text/javascript">
-            var url = "{{ route('like') }}";
-            var user_id = "{{ Auth::user()->id}}";
+            let like_url = "{{ route('like') }}";
+            let comment_url = "{{ route('comment') }}";
+            let user_id = "{{ Auth::user()->id}}";
         </script>
     </body>
 </html>
