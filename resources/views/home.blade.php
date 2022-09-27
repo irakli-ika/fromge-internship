@@ -4,9 +4,6 @@
             {{ __('Home') }}
         </h2>
     </x-slot>
-    @if (session()->get('qty'))
-        <h2>{{ session()->get('qty') }}</h2>
-    @endif
     @if (session()->get('message'))
         <x-jet-success-message :message="session()->get('message')"/>
             <script src="{{ asset('js/message-timer.js')}}"></script>

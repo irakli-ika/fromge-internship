@@ -16,15 +16,17 @@ use App\Http\Controllers\CommentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view("welcome");
+})->name('welcome');
+
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::resource('posts', PostController::class);
+    Route::resource('/posts', PostController::class);
+    // API routes
     Route::post('posts/like', [LikeController::class, 'like'])->name('like');
     Route::post('posts/comment', [CommentController::class, 'comment'])->name('comment');
 });

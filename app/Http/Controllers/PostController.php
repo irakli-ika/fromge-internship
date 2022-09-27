@@ -16,11 +16,8 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
-        $posts = Post::All()->sortByDesc('updated_at');
-        
-        return view('home', compact('posts'));
-
+    {
+        return view('home');
     }
 
     /**
